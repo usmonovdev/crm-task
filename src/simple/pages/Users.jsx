@@ -72,6 +72,7 @@ const Users = () => {
                     }
                   })
                   .map((users) => {
+                    console.log(users);
                     return (
                       <tr className="hover:bg-neutral-800">
                         <td className="p-3 border border-neutral-700">
