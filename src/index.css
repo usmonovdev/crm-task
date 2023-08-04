@@ -51,3 +51,25 @@
         @apply w-full h-[60px] outline-none px-3 rounded-lg bg-neutral-800 border border-neutral-700 focus:border-orange-700 transition placeholder:text-neutral-500
     }
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: #171717;
+}
+  
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #262626;
+    border-radius: 5px;
+}
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #454545;
+}

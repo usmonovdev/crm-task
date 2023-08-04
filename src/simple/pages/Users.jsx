@@ -4,12 +4,14 @@ import { FaUserAstronaut } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSimpleNavbar } from "../../store/theme";
 import { SimpleAddUser } from "../index";
+import { BiSolidArrowToTop } from "react-icons/bi";
 import moment from "moment";
 
 const Users = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
+  const [sort, setSort] = useState(false)
   const { simpleNavbar } = useSelector((state) => state.theme);
   const { simpleUsers } = useSelector((state) => state.simpleUsers);
 
@@ -37,8 +39,8 @@ const Users = () => {
           </button>
         </div>
         <input
-          className="input w-[300px]"
-          placeholder="Search"
+          className="input sm:w-[300px] w-full"
+          placeholder="Search by name"
           type="text"
           name="search"
           value={search}
@@ -46,38 +48,50 @@ const Users = () => {
           disabled={simpleUsers.length < 1}
         />
         {simpleUsers.length ? (
-          <>
-            <table className="w-full">
+          <div className="overflow-x-auto pb-4">
+            <table className="w-full min-w-[690px]">
               <thead className="h-[50px] w-full border border border-neutral-700 bg-neutral-800 rounded-lg">
                 <tr className="rounded-lg">
-                  <th className="text-left p-3">Full Name</th>
+                  <th className="text-left p-3">
+                    <div className="flex items-center gap-1">
+                    <p>Full Name</p>
+                    <BiSolidArrowToTop className={`cursor-pointer transition ${sort ? "rotate-180" : ""}`} onClick={() => setSort(!sort)}/>
+                    </div>
+                  </th>
                   <th className="text-left p-3">Phone</th>
                   <th className="text-left p-3">Added Time</th>
                   <th className="text-left p-3">Action</th>
                 </tr>
               </thead>
               <tbody className="cursor-pointer">
-                {simpleUsers.filter((f) => f.name.toLowerCase().includes(search)).map((users) => {
-                  return (
-                    <tr className="hover:bg-neutral-800">
-                      <td className="p-3 border border-neutral-700">
-                        {users.name}
-                      </td>
-                      <td className="p-3 border border-neutral-700">
-                        <a href={`tel:${users.phone}`}>{users.phone}</a>
-                      </td>
-                      <td className="p-3 border border-neutral-700">
-                        {moment(users.date).format("lll")}
-                      </td>
-                      <td className="p-3 border border-neutral-700">
-                        {users.action}
-                      </td>
-                    </tr>
-                  );
-                })}
+                {simpleUsers
+                  .filter((f) => f.name.toLowerCase().includes(search))
+                  .sort(function(a,b) {
+                    if (sort) {
+                      return a.name.localeCompare(b.name)
+                    }
+                  })
+                  .map((users) => {
+                    return (
+                      <tr className="hover:bg-neutral-800">
+                        <td className="p-3 border border-neutral-700">
+                          {users.name}
+                        </td>
+                        <td className="p-3 border border-neutral-700">
+                          <a href={`tel:${users.phone}`}>{users.phone}</a>
+                        </td>
+                        <td className="p-3 border border-neutral-700">
+                          {moment(users.date).format("lll")}
+                        </td>
+                        <td className="p-3 border border-neutral-700">
+                          {users.action}
+                        </td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
-          </>
+          </div>
         ) : (
           <div className="w-full h-[500px] center-mode gap-2 flex-col">
             <FaUserAstronaut className="text-7xl text-neutral-700" />
