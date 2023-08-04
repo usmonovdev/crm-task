@@ -7,6 +7,9 @@ import { MdCallMissed } from "react-icons/md";
 import { BiErrorCircle } from "react-icons/bi";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { BsChevronExpand, BsCheck } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment/moment";
+import { upSimpleUsers } from "../store/simple-users";
 
 const people = [
   {
@@ -44,6 +47,35 @@ const AddUser = ({ open, setOpen }) => {
   const [fullName, setFullName] = useState("");
   const [selected, setSelected] = useState(people[0]);
   const [phone, setPhone] = useState("");
+  const [isLoading, setIsLoading] = useState(false)
+  const [isError, setIsError] = useState(false)
+  const { simpleUsers } = useSelector(state => state.simpleUsers)
+  const id = Date.now()
+  const dispatch = useDispatch()
+
+  const handleAddUser = () => {
+    setIsLoading(true)
+    const data = {
+      id: id,
+      name: fullName,
+      action: selected.name,
+      phone,
+      date: id
+    }
+    if (fullName.length > 0 && phone.length >= 12) {
+      dispatch(upSimpleUsers([...simpleUsers, data]))
+      setFullName("")
+      setPhone("")
+      setSelected(people[0])
+      setIsLoading(false)
+      setIsError(false)
+      setOpen(false)
+    } else {
+      setIsLoading(false)
+      setIsError(true)
+    }
+  }
+
   return (
     <div
       className={`${
@@ -150,6 +182,7 @@ const AddUser = ({ open, setOpen }) => {
               )}
             </Listbox>
           </div>
+          {isError ? <p className="text-center text-red-600">Something went wrong!</p> : ""}
           <div className="w-full flex gap-4 relative bottom-0 justify-end absolute bottom-0">
             <button
               className="w-[96px] h-[42px] rounded-lg bg-neutral-800 border-neutral-700 border transition"
@@ -157,8 +190,8 @@ const AddUser = ({ open, setOpen }) => {
             >
               Cencel
             </button>
-            <button className="w-[96px] h-[42px] rounded-lg bg-orange-600 hover:bg-orange-700 transition">
-              Save
+            <button disabled={isLoading} className="w-[96px] h-[42px] rounded-lg bg-orange-600 hover:bg-orange-700 transition" onClick={handleAddUser}>
+              {isLoading ? "Loading..." : "Save"}
             </button>
           </div>
         </div>

@@ -3,17 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 export const simpleUsers = createSlice({
     name: "simpleUsers",
     initialState: {
-        simpleUsers: localStorage.getItem("SIMPLE_USERS") || [{
-            name: "Usmonov Azizbek",
-            id: 1,
-            phone: "+998901114455",
-            action: "uchrashuv"
-        }]
+        simpleUsers: JSON.parse(localStorage.getItem("SIMPLE_USERS")) || []
     },
     reducers: {
         upSimpleUsers: (state, action) => {
             state.simpleUsers = action.payload
-            localStorage.setItem("SIMPLE_USERS", state.simpleUsers)
+            localStorage.setItem("SIMPLE_USERS", JSON.stringify(action.payload))
         }
     }
 })
