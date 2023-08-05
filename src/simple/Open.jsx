@@ -85,7 +85,7 @@ const Open = ({ open, setOpen, userId }) => {
     <div
       className={`${
         open ? "visible opactiy-1" : "invisible opactiy-0"
-      } transition`}
+      } transition z-[1000]`}
     >
       <ModalFather>
         <div className="w-full h-full flex flex-col gap-[15px] relative">

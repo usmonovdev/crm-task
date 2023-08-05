@@ -5,14 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleSimpleNavbar } from "../../store/theme";
 import { SimpleAddUser, SimpleUserOpen } from "../index";
 import { BiSolidArrowToTop } from "react-icons/bi";
+import { AiOutlineCloudDownload } from "react-icons/ai"
 import moment from "moment";
 import { upSimpleUsers } from "../../store/simple-users";
+import { exportToExel } from "../../utils/ExelExport";
 
 const Users = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
-  const [sort, setSort] = useState(false);
+  const [sort, setSort] = useState(true);
   const [dataOpen, setDataOpen] = useState(false);
   const [id, setId] = useState("");
   const { simpleNavbar } = useSelector((state) => state.theme);
@@ -23,9 +25,9 @@ const Users = () => {
   }, []);
 
   const handleDelete = (e) => {
-    const filter = simpleUsers.filter((f) => f.id !== e)
+    const filter = simpleUsers.filter((f) => f.id !== e);
     dispatch(upSimpleUsers([...filter]));
-  }
+  };
 
   return (
     <>
@@ -44,12 +46,21 @@ const Users = () => {
               }`}
             />
           </div>
-          <button
-            className="w-[96px] h-[42px] rounded-lg bg-orange-600 hover:bg-orange-700 transition"
-            onClick={() => setOpen(true)}
-          >
-            Add User
-          </button>
+          <div className="flex gap-2">
+            <div
+              className="flex items-center gap-3 bg-neutral-800 border-neutral-700 border cursor-pointer w-fit p-2 rounded-lg"
+              onClick={() => exportToExel("CRM Task - Users", simpleUsers)}
+            >
+              <h1 className="uppercase">Download</h1>
+              <AiOutlineCloudDownload className={`text-xl transition`} />
+            </div>
+            <button
+              className="w-[96px] h-[42px] rounded-lg bg-orange-600 hover:bg-orange-700 transition"
+              onClick={() => setOpen(true)}
+            >
+              Add User
+            </button>
+          </div>
         </div>
         <input
           className="input sm:w-[300px] w-full"
@@ -69,7 +80,7 @@ const Users = () => {
                     <div className="flex items-center gap-1">
                       <p>Full Name</p>
                       <BiSolidArrowToTop
-                        className={`cursor-pointer transition ${
+                        className={`cursor-pointer transition z-[999] ${
                           sort ? "rotate-180" : ""
                         }`}
                         onClick={() => setSort(!sort)}
@@ -112,13 +123,13 @@ const Users = () => {
                         <td className="p-3 border border-neutral-700">
                           <div className="flex flex-row gap-3 justify-center">
                             <button
-                              className="w-[96px] h-[42px] z-[1000] rounded-lg border border-orange-600 transition"
+                              className="w-[96px] h-[42px] rounded-lg border border-orange-600 transition"
                               onClick={() => setDataOpen(!dataOpen)}
                             >
                               Edit User
                             </button>
                             <button
-                              className="w-[96px] h-[42px] z-[1000] rounded-lg bg-red-600 hover:bg-red-700 transition"
+                              className="w-[96px] h-[42px] rounded-lg bg-red-600 hover:bg-red-700 transition"
                               onClick={() => handleDelete(users.id)}
                             >
                               Delete User

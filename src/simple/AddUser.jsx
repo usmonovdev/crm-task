@@ -46,40 +46,45 @@ const AddUser = ({ open, setOpen }) => {
   const [fullName, setFullName] = useState("");
   const [selected, setSelected] = useState(actions[0]);
   const [phone, setPhone] = useState("");
-  const [isLoading, setIsLoading] = useState(false)
-  const [isError, setIsError] = useState(false)
-  const { simpleUsers } = useSelector(state => state.simpleUsers)
-  const id = Date.now()
-  const dispatch = useDispatch()
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [location, setLocation] = useState("");
+  const [rejected, setRejected] = useState("");
+  const { simpleUsers } = useSelector((state) => state.simpleUsers);
+  const id = Date.now();
+  const dispatch = useDispatch();
 
   const handleAddUser = () => {
-    setIsLoading(true)
+    setIsLoading(true);
     const data = {
       id: id,
       name: fullName,
       action: selected.name,
       phone,
-      date: id
-    }
+      date: id,
+      location,
+      rejected
+    };
     if (fullName.length > 0 && phone.length >= 12) {
-      dispatch(upSimpleUsers([...simpleUsers, data]))
-      setFullName("")
-      setPhone("")
-      setSelected(actions[0])
-      setIsLoading(false)
-      setIsError(false)
-      setOpen(false)
+      dispatch(upSimpleUsers([...simpleUsers, data]));
+      setFullName("");
+      setPhone("");
+      setLocation("");
+      setSelected(actions[0]);
+      setIsLoading(false);
+      setIsError(false);
+      setOpen(false);
     } else {
-      setIsLoading(false)
-      setIsError(true)
+      setIsLoading(false);
+      setIsError(true);
     }
-  }
+  };
 
   return (
     <div
       className={`${
         open ? "visible opactiy-1" : "invisible opactiy-0"
-      } transition`}
+      } transition z-[1000]`}
     >
       <ModalFather>
         <div className="w-full h-full flex flex-col gap-[15px] relative">
@@ -180,8 +185,34 @@ const AddUser = ({ open, setOpen }) => {
                 </>
               )}
             </Listbox>
+            {selected.name == "Meeting" ? (
+              <input
+                type="text"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className="input"
+                placeholder="Location"
+              />
+            ) : (
+              ""
+            )}
+            {selected.name == "Rejected" ? (
+              <input
+                type="text"
+                value={rejected}
+                onChange={(e) => setRejected(e.target.value)}
+                className="input"
+                placeholder="Reason"
+              />
+            ) : (
+              ""
+            )}
           </div>
-          {isError ? <p className="text-center text-red-600">Something went wrong!</p> : ""}
+          {isError ? (
+            <p className="text-center text-red-600">Something went wrong!</p>
+          ) : (
+            ""
+          )}
           <div className="w-full flex gap-4 relative bottom-0 justify-end absolute bottom-0">
             <button
               className="w-[96px] h-[42px] rounded-lg bg-neutral-800 border-neutral-700 border transition"
@@ -189,7 +220,11 @@ const AddUser = ({ open, setOpen }) => {
             >
               Cencel
             </button>
-            <button disabled={isLoading} className="w-[96px] h-[42px] rounded-lg bg-orange-600 hover:bg-orange-700 transition" onClick={handleAddUser}>
+            <button
+              disabled={isLoading}
+              className="w-[96px] h-[42px] rounded-lg bg-orange-600 hover:bg-orange-700 transition"
+              onClick={handleAddUser}
+            >
               {isLoading ? "Loading..." : "Save"}
             </button>
           </div>
