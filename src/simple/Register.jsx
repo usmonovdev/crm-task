@@ -12,7 +12,7 @@ const Register = () => {
 
   return (
     <div className="center-mode h-[100vh]" data-aos="zoom-in">
-      <div className="flex flex-col gap-[15px] w-[400px]">
+      <div className="flex flex-col gap-[15px] sm:w-[400px] w-full sm:px-10 p-3">
         <h1 className="text-center text-2xl uppercase bold text-neutral-100">
           Register
         </h1>

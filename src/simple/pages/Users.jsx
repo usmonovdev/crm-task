@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { FaUserAstronaut } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +14,10 @@ const Users = () => {
   const [sort, setSort] = useState(false)
   const { simpleNavbar } = useSelector((state) => state.theme);
   const { simpleUsers } = useSelector((state) => state.simpleUsers);
+
+  useEffect(() => {
+    document.title = "CRM Task - Users"
+  }, [])
 
   return (
     <>

@@ -9,19 +9,19 @@ const routes = [
   {
     id: 1,
     name: "Users",
-    link: "/dashboard/users",
+    link: "/users",
     icon: FiUsers,
   },
   {
     id: 2,
     name: "Sale",
-    link: "/dashboard/sale",
+    link: "/sale",
     icon: RiMoneyDollarCircleLine,
   },
   {
     id: 3,
     name: "Meeting",
-    link: "/dashboard/meeting",
+    link: "/meeting",
     icon: LiaBusinessTimeSolid,
   },
 ];
@@ -34,8 +34,8 @@ const Navbar = () => {
   return (
     <>
       {simpleNavbar ? (
-        <div>
-          <ul className="w-[70px] h-[100vh] bg-orange-600 absolute">
+        <div className="w-screen absolute bg-neutral-950/70 z-[1000]">
+          <ul className="w-[70px] h-[100vh] bg-orange-600">
             {routes.map((route) => {
               return (
                 <li

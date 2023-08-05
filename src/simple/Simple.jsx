@@ -1,19 +1,39 @@
-import React, { useEffect } from 'react'
-import { SimpleNavbar, SimpleUsers} from './index'
-import { Router, Routes, useNavigate } from 'react-router-dom'
+import React, { useEffect } from "react";
+import {
+  SimpleLogin,
+  SimpleMeeting,
+  SimpleNavbar,
+  SimpleRegister,
+  SimpleSale,
+  SimpleUsers,
+} from "./index";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import PageNotFound from "../PageNotFound";
 
 const Simple = () => {
   const navigate = useNavigate()
-  // useEffect(() => {
-  //   if (!localStorage.getItem("IS_SIMPLE")) {
-  //     navigate("/login")
-  //   }
-  // }, [])
+  const isSimple = localStorage.getItem("IS_SIMPLE")
+  useEffect(() => {
+    if (isSimple === null || isSimple === false) {
+      navigate("/login")
+    } else {
+      navigate("/users")
+    }
+  }, [])
   return (
     <div>
-      simple main
-    </div>
-  )
-}
+      <SimpleNavbar />
+      <Routes>
+        <Route path="login" element={<SimpleLogin />} />
+        <Route path="register" element={<SimpleRegister />} />
 
-export default Simple
+        <Route path="users" element={<SimpleUsers />} />
+        <Route path="sale" element={<SimpleSale />} />
+        <Route path="meeting" element={<SimpleMeeting />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </div>
+  );
+};
+
+export default Simple;

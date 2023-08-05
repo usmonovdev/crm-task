@@ -17,7 +17,7 @@ const Login = () => {
   const handleLogin = () => {
     setIsLoading(true);
     if (fullName.length > 0 && password === simplePassword) {
-      navigate("/dashboard/users");
+      navigate("/users");
       localStorage.setItem("SIMPLE_NAME", fullName)
       localStorage.setItem("IS_SIMPLE", true)
       localStorage.setItem("IS_ADMIN", false)
@@ -32,7 +32,7 @@ const Login = () => {
 
   return (
     <div className="center-mode h-[100vh]" data-aos="zoom-in">
-      <div className="flex flex-col gap-[15px] w-[400px]">
+      <div className="flex flex-col gap-[15px] sm:w-[400px] w-full sm:px-10 p-3">
         <h1 className="text-center text-2xl uppercase bold text-neutral-100">
           Log In
         </h1>
