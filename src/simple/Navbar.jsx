@@ -2,6 +2,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { FiUsers } from "react-icons/fi";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { LiaBusinessTimeSolid } from "react-icons/lia";
+import { MdCallMissed } from "react-icons/md"
+import { BiErrorCircle } from "react-icons/bi"
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSimpleNavbar } from "../store/theme";
 
@@ -24,6 +26,18 @@ const routes = [
     link: "/meeting",
     icon: LiaBusinessTimeSolid,
   },
+  {
+    id: 4,
+    name: "Missed Calls",
+    link: "/missed",
+    icon: MdCallMissed,
+  },
+  {
+    id: 5,
+    name: "Rejected",
+    link: "/rejected",
+    icon: BiErrorCircle,
+  },
 ];
 
 const Navbar = () => {
@@ -40,7 +54,7 @@ const Navbar = () => {
               return (
                 <li
                   key={route.id}
-                  className={`w-full h-[90px] cursor-pointer p-2 flex flex-col items-center justify-center transition ${
+                  className={`w-full h-[90px] cursor-pointer p-2 flex flex-col items-center justify-center transition hover:bg-orange-700 transition ${
                     pathname === route.link && "bg-orange-700"
                   }`}
                   onClick={() => {
@@ -49,7 +63,7 @@ const Navbar = () => {
                   }}
                 >
                   <route.icon className="text-2xl" />
-                  <p>{route.name}</p>
+                  <p className="text-center">{route.name}</p>
                 </li>
               );
             })}

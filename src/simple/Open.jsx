@@ -42,38 +42,44 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const AddUser = ({ open, setOpen }) => {
+const Open = ({ open, setOpen, userId }) => {
+  console.log(userId.name);
   const [fullName, setFullName] = useState("");
+  console.log(fullName);
   const [selected, setSelected] = useState(actions[0]);
   const [phone, setPhone] = useState("");
-  const [isLoading, setIsLoading] = useState(false)
-  const [isError, setIsError] = useState(false)
-  const { simpleUsers } = useSelector(state => state.simpleUsers)
-  const id = Date.now()
-  const dispatch = useDispatch()
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const { simpleUsers } = useSelector((state) => state.simpleUsers);
+  const dispatch = useDispatch();
 
   const handleAddUser = () => {
-    setIsLoading(true)
-    const data = {
-      id: id,
-      name: fullName,
-      action: selected.name,
-      phone,
-      date: id
-    }
+    const editUser = simpleUsers.map((data) =>
+      data.id === userId.id
+        ? {
+            ...data,
+            name: fullName,
+            action: selected.name,
+            phone: phone,
+            id: data.id,
+            date: data.date,
+          }
+        : data
+    );
+    setIsLoading(true);
     if (fullName.length > 0 && phone.length >= 12) {
-      dispatch(upSimpleUsers([...simpleUsers, data]))
-      setFullName("")
-      setPhone("")
-      setSelected(actions[0])
-      setIsLoading(false)
-      setIsError(false)
-      setOpen(false)
+      dispatch(upSimpleUsers([...editUser]));
+      setFullName("");
+      setPhone("");
+      setSelected(actions[0]);
+      setIsLoading(false);
+      setIsError(false);
+      setOpen(false);
     } else {
-      setIsLoading(false)
-      setIsError(true)
+      setIsLoading(false);
+      setIsError(true);
     }
-  }
+  };
 
   return (
     <div
@@ -85,7 +91,7 @@ const AddUser = ({ open, setOpen }) => {
         <div className="w-full h-full flex flex-col gap-[15px] relative">
           <div className="flex flex-col gap-[15px]">
             <h1 className="text-center text-2xl uppercase bold text-neutral-100">
-              Add User
+              Edit User
             </h1>
             <input
               type="text"
@@ -181,7 +187,11 @@ const AddUser = ({ open, setOpen }) => {
               )}
             </Listbox>
           </div>
-          {isError ? <p className="text-center text-red-600">Something went wrong!</p> : ""}
+          {isError ? (
+            <p className="text-center text-red-600">Something went wrong!</p>
+          ) : (
+            ""
+          )}
           <div className="w-full flex gap-4 relative bottom-0 justify-end absolute bottom-0">
             <button
               className="w-[96px] h-[42px] rounded-lg bg-neutral-800 border-neutral-700 border transition"
@@ -189,7 +199,11 @@ const AddUser = ({ open, setOpen }) => {
             >
               Cencel
             </button>
-            <button disabled={isLoading} className="w-[96px] h-[42px] rounded-lg bg-orange-600 hover:bg-orange-700 transition" onClick={handleAddUser}>
+            <button
+              disabled={isLoading}
+              className="w-[96px] h-[42px] rounded-lg bg-orange-600 hover:bg-orange-700 transition"
+              onClick={handleAddUser}
+            >
               {isLoading ? "Loading..." : "Save"}
             </button>
           </div>
@@ -199,4 +213,4 @@ const AddUser = ({ open, setOpen }) => {
   );
 };
 
-export default AddUser;
+export default Open;
