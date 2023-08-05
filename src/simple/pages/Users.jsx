@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleSimpleNavbar } from "../../store/theme";
 import { SimpleAddUser, SimpleUserOpen } from "../index";
 import { BiSolidArrowToTop } from "react-icons/bi";
-import { AiOutlineCloudDownload } from "react-icons/ai"
+import { AiOutlineCloudDownload } from "react-icons/ai";
 import { upSimpleUsers } from "../../store/simple-users";
 import { exportToExel } from "../../utils/ExelExport";
 import { DataNotFound } from "../../ui";
@@ -19,6 +19,8 @@ const Users = () => {
   const [id, setId] = useState("");
   const { simpleNavbar } = useSelector((state) => state.theme);
   const { simpleUsers } = useSelector((state) => state.simpleUsers);
+  const { personnels } = useSelector((state) => state.personnels);
+  console.log(personnels[0].deadline);
 
   useEffect(() => {
     document.title = "CRM Task - Users";
@@ -34,7 +36,7 @@ const Users = () => {
       <SimpleAddUser open={open} setOpen={setOpen} />
       <SimpleUserOpen open={dataOpen} setOpen={setDataOpen} userId={id} />
       <div className="container mx-auto sm:px-10 p-3 flex flex-col gap-8">
-        <div className="flex justify-between">
+        <div className="flex justify-between gap-3">
           <div
             className="flex items-center gap-3 bg-neutral-800 border-neutral-700 border cursor-pointer w-fit p-2 rounded-lg"
             onClick={() => dispatch(toggleSimpleNavbar())}
@@ -62,15 +64,22 @@ const Users = () => {
             </button>
           </div>
         </div>
-        <input
-          className="input sm:w-[300px] w-full"
-          placeholder="Search by name"
-          type="text"
-          name="search"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          disabled={simpleUsers.length < 1}
-        />
+        <div className="flex sm:flex-row flex-col gap-3 w-full">
+          <input
+            className="input sm:w-[300px] w-full"
+            placeholder="Search by name"
+            type="text"
+            name="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            disabled={simpleUsers.length < 1}
+          />
+          <div
+            className="flex items-center gap-3 bg-neutral-800 sm:w-fit w-full px-2 border-neutral-700 border cursor-pointer py-2 rounded-lg"
+          >
+            <h1 className="uppercase">Deadline: {personnels[0].deadline}</h1>
+          </div>
+        </div>
         {simpleUsers.length ? (
           <div className="overflow-x-auto pb-4">
             <table className="w-full min-w-[900px]">
@@ -101,7 +110,7 @@ const Users = () => {
                       return a.name.localeCompare(b.name);
                     }
                   })
-                  .map((users, inx) => {
+                  .map((users) => {
                     return (
                       <tr
                         className="hover:bg-neutral-800"

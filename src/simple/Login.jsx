@@ -25,7 +25,8 @@ const Login = () => {
         name: fullName,
         logged_time: time,
         id: time,
-        users: simpleUsers
+        users: simpleUsers,
+        deadline: 0
       }
     ]
     if (fullName.length > 0 && password === simplePassword) {
