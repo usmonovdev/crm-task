@@ -43,15 +43,14 @@ function classNames(...classes) {
 }
 
 const Open = ({ open, setOpen, userId }) => {
-  console.log(userId.name);
   const [fullName, setFullName] = useState("");
-  console.log(fullName);
   const [selected, setSelected] = useState(actions[0]);
   const [phone, setPhone] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const { simpleUsers } = useSelector((state) => state.simpleUsers);
   const dispatch = useDispatch();
+  const time = Date.now()
 
   const handleAddUser = () => {
     const editUser = simpleUsers.map((data) =>
@@ -63,6 +62,7 @@ const Open = ({ open, setOpen, userId }) => {
             phone: phone,
             id: data.id,
             date: data.date,
+            sold_time: `${selected.name == "Sold" ? time : ""}`
           }
         : data
     );

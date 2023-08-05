@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   AdminDeadline,
   AdminLogin,
@@ -7,20 +7,10 @@ import {
   AdminSale,
   AdminUsers,
 } from "./index";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import PageNotFound from "../PageNotFound";
 
 const Admin = () => {
-  const navigate = useNavigate()
-  const isAdmin = localStorage.getItem("IS_ADMIN")
-  console.log(isAdmin);
-  useEffect(() => {
-    if (isAdmin === false) {
-      navigate("/admin-page/users")
-    } else {
-      navigate("/admin-page/login")
-    }
-  }, [])
   return (
     <div>
       <AdminNavbar />

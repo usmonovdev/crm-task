@@ -17,7 +17,6 @@ const Meeting = () => {
   const { simpleNavbar } = useSelector((state) => state.theme);
   const { simpleUsers } = useSelector((state) => state.simpleUsers);
   const [filtered, setFiltered] = useState(simpleUsers)
-  console.log(simpleUsers);
 
   useEffect(() => {
     document.title = "CRM Task - Meetings";

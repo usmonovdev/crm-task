@@ -9,6 +9,7 @@ import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { BsChevronExpand, BsCheck } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { upSimpleUsers } from "../store/simple-users";
+import moment from "moment";
 
 const actions = [
   {
@@ -63,7 +64,8 @@ const AddUser = ({ open, setOpen }) => {
       phone,
       date: id,
       location,
-      rejected
+      rejected,
+      sold_time: `${selected.name == "Sold" ? id : ""}`
     };
     if (fullName.length > 0 && phone.length >= 12) {
       dispatch(upSimpleUsers([...simpleUsers, data]));

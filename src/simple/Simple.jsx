@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   SimpleLogin,
   SimpleMeeting,
@@ -9,19 +9,10 @@ import {
   SimpleSale,
   SimpleUsers,
 } from "./index";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import PageNotFound from "../PageNotFound";
 
 const Simple = () => {
-  const navigate = useNavigate()
-  const isSimple = localStorage.getItem("IS_SIMPLE")
-  useEffect(() => {
-    if (isSimple === null || isSimple === false) {
-      navigate("/login")
-    } else {
-      navigate("/users")
-    }
-  }, [])
   return (
     <div>
       <SimpleNavbar />

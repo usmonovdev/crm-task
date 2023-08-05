@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { updatePersonnel } from "../store/personnels";
 
 const Login = () => {
   const [fullName, setFullName] = useState("");
@@ -8,17 +10,27 @@ const Login = () => {
   const [isError, setIsError] = useState(false)
   const simplePassword = localStorage.getItem("SIMPLE_PASSWORD");
   const navigate = useNavigate();
-
+  const dispatch = useDispatch()
+  const { simpleUsers } = useSelector(state => state.simpleUsers)
   useEffect(() => {
     document.title = "CRM Task - Login"
     localStorage.setItem("SIMPLE_PASSWORD", "password");
   }, []);
+  const time = Date.now()
 
   const handleLogin = () => {
     setIsLoading(true);
+    const data = [
+      {
+        name: fullName,
+        logged_time: time,
+        id: time,
+        users: simpleUsers
+      }
+    ]
     if (fullName.length > 0 && password === simplePassword) {
       navigate("/users");
-      localStorage.setItem("SIMPLE_NAME", fullName)
+      dispatch(updatePersonnel(data))
       localStorage.setItem("IS_SIMPLE", true)
       localStorage.setItem("IS_ADMIN", false)
       localStorage.setItem("IS_SUPER_ADMIN", false)

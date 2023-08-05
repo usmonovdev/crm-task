@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
-import { FaUserAstronaut } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSimpleNavbar } from "../../store/theme";
 import { SimpleAddUser, SimpleUserOpen } from "../index";
 import { BiSolidArrowToTop } from "react-icons/bi";
 import { AiOutlineCloudDownload } from "react-icons/ai"
-import moment from "moment";
 import { upSimpleUsers } from "../../store/simple-users";
 import { exportToExel } from "../../utils/ExelExport";
+import { DataNotFound } from "../../ui";
+import moment from "moment";
 
 const Users = () => {
   const [open, setOpen] = useState(false);
@@ -143,13 +143,7 @@ const Users = () => {
             </table>
           </div>
         ) : (
-          <div className="w-full h-[500px] center-mode gap-2 flex-col">
-            <FaUserAstronaut className="text-7xl text-neutral-700" />
-            <h1 className="text-3xl text-center uppercase">USERS Not found!</h1>
-            <button className="w-[96px] h-[42px] rounded-lg bg-orange-600 hover:bg-orange-700 transition">
-              Add User
-            </button>
-          </div>
+          <DataNotFound />
         )}
       </div>
     </>

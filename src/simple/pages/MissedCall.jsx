@@ -17,6 +17,7 @@ const MissedCall = () => {
   const { simpleNavbar } = useSelector((state) => state.theme);
   const { simpleUsers } = useSelector((state) => state.simpleUsers);
   const [filtered, setFiltered] = useState(simpleUsers);
+  const time = Date.now()
 
   useEffect(() => {
     document.title = "CRM Task - Sold";
@@ -39,6 +40,7 @@ const MissedCall = () => {
             phone: e.phone,
             id: data.id,
             date: data.date,
+            sold_time: time
           }
         : data
     );
@@ -120,7 +122,7 @@ const MissedCall = () => {
                               className="w-[96px] h-[42px] rounded-lg bg-green-700 hover:bg-green-800 transition"
                               onClick={() => handleConnected(users)}
                             >
-                              Connected
+                              Sold
                             </button>
                             <button
                               className="w-[96px] h-[42px] rounded-lg bg-red-600 hover:bg-red-700 transition"

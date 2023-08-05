@@ -16,7 +16,7 @@ const Login = () => {
 
   const handleLogin = () => {
     setIsLoading(true);
-    if (fullName.length > 0 && password === simplePassword) {
+    if (fullName.length > 0 && password == simplePassword) {
       navigate("/admin-dashboard/users");
       localStorage.setItem("ADMIN_NAME", fullName)
       localStorage.setItem("IS_SIMPLE", false)

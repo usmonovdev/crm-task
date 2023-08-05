@@ -17,7 +17,6 @@ const Rejected = () => {
   const { simpleNavbar } = useSelector((state) => state.theme);
   const { simpleUsers } = useSelector((state) => state.simpleUsers);
   const [filtered, setFiltered] = useState(simpleUsers)
-  console.log(filtered);
 
   useEffect(() => {
     document.title = "CRM Task - Rejected";

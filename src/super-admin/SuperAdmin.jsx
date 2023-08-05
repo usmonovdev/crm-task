@@ -1,18 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { SuperAdmins, SuperLogin, SuperNavbar, SuperUsers } from "./index";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import PageNotFound from "../PageNotFound";
 
 const SuperAdmin = () => {
-  const navigate = useNavigate()
-  const isSuper = localStorage.getItem("IS_ADMIN")
-  useEffect(() => {
-    if (isSuper === false) {
-      navigate("/super-page/users")
-    } else {
-      navigate("/super-page/login")
-    }
-  }, [])
   return (
     <div>
       <SuperNavbar />
