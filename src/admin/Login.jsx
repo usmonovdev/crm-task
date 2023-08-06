@@ -15,7 +15,6 @@ const Login = () => {
 
   useEffect(() => {
     document.title = "CRM Task - Admin Login"
-    localStorage.setItem("ADMIN_PASSWORD", "admin_password");
   }, []);
 
   const handleLogin = () => {
@@ -28,12 +27,10 @@ const Login = () => {
       }
     ]
     if (fullName.length > 0 && password == simplePassword) {
-      navigate("/admin-page/users");
+      navigate("/admin-dashboard/personnels");
       dispatch(updateAdmin(data))
       localStorage.setItem("ADMIN_NAME", fullName)
-      localStorage.setItem("IS_SIMPLE", false)
       localStorage.setItem("IS_ADMIN", true)
-      localStorage.setItem("IS_SUPER_ADMIN", false)
       setIsLoading(false)
       setIsError(false)
     } else {

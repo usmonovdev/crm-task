@@ -20,7 +20,6 @@ const Users = () => {
   const { simpleNavbar } = useSelector((state) => state.theme);
   const { simpleUsers } = useSelector((state) => state.simpleUsers);
   const { personnels } = useSelector((state) => state.personnels);
-  // console.log(personnels[0].deadline);
 
   useEffect(() => {
     document.title = "CRM Task - Users";
@@ -35,7 +34,7 @@ const Users = () => {
     <>
       <SimpleAddUser open={open} setOpen={setOpen} />
       <SimpleUserOpen open={dataOpen} setOpen={setDataOpen} userId={id} />
-      <div className="container mx-auto sm:px-10 p-3 flex flex-col gap-8">
+      <div className="container mx-auto sm:px-10 p-3 flex flex-col gap-8" data-aos="fade-down">
         <div className="flex justify-between gap-3">
           <div
             className="flex items-center gap-3 bg-neutral-800 border-neutral-700 border cursor-pointer w-fit p-2 rounded-lg"
@@ -49,13 +48,17 @@ const Users = () => {
             />
           </div>
           <div className="flex gap-2">
-            <div
-              className="flex items-center gap-3 bg-neutral-800 border-neutral-700 border cursor-pointer w-fit p-2 rounded-lg"
-              onClick={() => exportToExel("CRM Task - Users", simpleUsers)}
-            >
-              <h1 className="uppercase">Download</h1>
-              <AiOutlineCloudDownload className={`text-xl transition`} />
-            </div>
+            {!simpleUsers.length == 0 ? (
+              <div
+                className="flex items-center gap-3 bg-neutral-800 border-neutral-700 border cursor-pointer w-fit p-2 rounded-lg"
+                onClick={() => exportToExel("CRM Task - Users", simpleUsers)}
+              >
+                <h1 className="uppercase">Download</h1>
+                <AiOutlineCloudDownload className={`text-xl transition`} />
+              </div>
+            ) : (
+              ""
+            )}
             <button
               className="w-[96px] h-[42px] rounded-lg bg-orange-600 hover:bg-orange-700 transition"
               onClick={() => setOpen(true)}
@@ -74,10 +77,10 @@ const Users = () => {
             onChange={(e) => setSearch(e.target.value)}
             disabled={simpleUsers.length < 1}
           />
-          <div
-            className="flex items-center gap-3 bg-neutral-800 sm:w-fit w-full px-2 border-neutral-700 border cursor-pointer py-2 rounded-lg"
-          >
-            <h1 className="uppercase">Deadline: {personnels.length > 0 ? personnels[0].deadline : "0"}</h1>
+          <div className="flex items-center gap-3 bg-neutral-800 sm:w-fit w-full px-2 border-neutral-700 border cursor-pointer py-2 rounded-lg">
+            <h1 className="uppercase">
+              Deadline: {personnels.length > 0 ? personnels[0].deadline : "0"}
+            </h1>
           </div>
         </div>
         {simpleUsers.length ? (
@@ -152,7 +155,7 @@ const Users = () => {
             </table>
           </div>
         ) : (
-          <DataNotFound />
+          <DataNotFound title="Users not found!" />
         )}
       </div>
     </>

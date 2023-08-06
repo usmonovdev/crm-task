@@ -20,8 +20,8 @@ function App() {
     <>
       <Routes>
         <Route path='/*' element={<SimpleMain />} />
-        <Route path='/admin-page/*' element={<AdminMain />} />
-        <Route path='/super-page/*' element={<SuperMain />} />
+        <Route path='/admin-dashboard/*' element={<AdminMain />} />
+        <Route path='/super-admin/*' element={<SuperMain />} />
       </Routes>
     </>
   );

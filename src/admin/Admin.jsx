@@ -17,7 +17,7 @@ const Admin = () => {
       <Routes>
         <Route path="login" element={<AdminLogin />} />
 
-        <Route path="users" element={<AdminUsers />} />
+        <Route path="personnels" element={<AdminUsers />} />
         <Route path="sale" element={<AdminSale />} />
         <Route path="rejected" element={<AdminRejected />} />
         <Route path="deadline" element={<AdminDeadline />} />

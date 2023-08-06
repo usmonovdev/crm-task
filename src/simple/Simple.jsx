@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  SimpleHome,
   SimpleLogin,
   SimpleMeeting,
   SimpleMissed,
@@ -20,6 +21,7 @@ const Simple = () => {
         <Route path="login" element={<SimpleLogin />} />
         <Route path="register" element={<SimpleRegister />} />
 
+        <Route path="/" element={<SimpleHome />} />
         <Route path="users" element={<SimpleUsers />} />
         <Route path="sale" element={<SimpleSale />} />
         <Route path="meeting" element={<SimpleMeeting />} />

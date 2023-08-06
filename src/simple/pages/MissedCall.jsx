@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
-import { FaUserAstronaut } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSimpleNavbar } from "../../store/theme";
 import { SimpleAddUser } from "../index";
@@ -9,6 +8,7 @@ import { AiOutlineCloudDownload } from "react-icons/ai";
 import moment from "moment";
 import { upSimpleUsers } from "../../store/simple-users";
 import { exportToExel } from "../../utils/ExelExport";
+import { DataNotFound } from "../../ui";
 
 const MissedCall = () => {
   const [open, setOpen] = useState(false);
@@ -17,7 +17,7 @@ const MissedCall = () => {
   const { simpleNavbar } = useSelector((state) => state.theme);
   const { simpleUsers } = useSelector((state) => state.simpleUsers);
   const [filtered, setFiltered] = useState(simpleUsers);
-  const time = Date.now()
+  const time = Date.now();
 
   useEffect(() => {
     document.title = "CRM Task - Sold";
@@ -40,7 +40,7 @@ const MissedCall = () => {
             phone: e.phone,
             id: data.id,
             date: data.date,
-            sold_time: time
+            sold_time: time,
           }
         : data
     );
@@ -50,7 +50,7 @@ const MissedCall = () => {
   return (
     <>
       <SimpleAddUser open={open} setOpen={setOpen} />
-      <div className="container mx-auto sm:px-10 p-3 flex flex-col gap-8">
+      <div className="container mx-auto sm:px-10 p-3 flex flex-col gap-8" data-aos="fade-down">
         <div className="flex justify-between">
           <div
             className="flex items-center gap-3 bg-neutral-800 border-neutral-700 border cursor-pointer w-fit p-2 rounded-lg"
@@ -63,15 +63,19 @@ const MissedCall = () => {
               }`}
             />
           </div>
-          <div
-            className="flex items-center gap-3 bg-neutral-800 border-neutral-700 border cursor-pointer w-fit p-2 rounded-lg"
-            onClick={() =>
-              exportToExel("CRM Task - Unable to connect", filtered)
-            }
-          >
-            <h1 className="uppercase">Download</h1>
-            <AiOutlineCloudDownload className={`text-xl transition`} />
-          </div>
+          {!simpleUsers.length == 0 ? (
+            <div
+              className="flex items-center gap-3 bg-neutral-800 border-neutral-700 border cursor-pointer w-fit p-2 rounded-lg"
+              onClick={() =>
+                exportToExel("CRM Task - Unable to connect", filtered)
+              }
+            >
+              <h1 className="uppercase">Download</h1>
+              <AiOutlineCloudDownload className={`text-xl transition`} />
+            </div>
+          ) : (
+            ""
+          )}
         </div>
         {simpleUsers.length ? (
           <div className="overflow-x-auto pb-4">
@@ -139,13 +143,7 @@ const MissedCall = () => {
             </table>
           </div>
         ) : (
-          <div className="w-full h-[500px] center-mode gap-2 flex-col">
-            <FaUserAstronaut className="text-7xl text-neutral-700" />
-            <h1 className="text-3xl text-center uppercase">USERS Not found!</h1>
-            <button className="w-[96px] h-[42px] rounded-lg bg-orange-600 hover:bg-orange-700 transition">
-              Add User
-            </button>
-          </div>
+          <DataNotFound title="Missed calls not found" />
         )}
       </div>
     </>

@@ -6,21 +6,18 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false)
-  const simplePassword = localStorage.getItem("SIMPLE_PASSWORD");
+  const simplePassword = localStorage.getItem("SUPER_PASSWORD");
   const navigate = useNavigate();
 
   useEffect(() => {
     document.title = "CRM Task - Super Admin Login"
-    localStorage.setItem("SIMPLE_PASSWORD", "password");
   }, []);
 
   const handleLogin = () => {
     setIsLoading(true);
     if (fullName.length > 0 && password === simplePassword) {
-      navigate("/super-page/users");
+      navigate("/super-admin/personnels");
       localStorage.setItem("SUPER_NAME", fullName)
-      localStorage.setItem("IS_SIMPLE", false)
-      localStorage.setItem("IS_ADMIN", false)
       localStorage.setItem("IS_SUPER_ADMIN", true)
       setIsLoading(false)
       setIsError(false)

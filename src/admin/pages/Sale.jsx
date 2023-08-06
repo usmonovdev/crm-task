@@ -21,7 +21,7 @@ const Sale = () => {
 
   return (
     <>
-      <div className="container mx-auto sm:px-10 p-3 flex flex-col gap-8">
+      <div className="container mx-auto sm:px-10 p-3 flex flex-col gap-8" data-aos="fade-down">
         <div className="flex justify-between">
           <div
             className="flex items-center gap-3 bg-neutral-800 border-neutral-700 border cursor-pointer w-fit p-2 rounded-lg"

@@ -10,7 +10,7 @@ const SuperAdmin = () => {
       <Routes>
         <Route path="login" element={<SuperLogin />} />
 
-        <Route path="users" element={<SuperUsers />} />
+        <Route path="personnels" element={<SuperUsers />} />
         <Route path="admins" element={<SuperAdmins />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>

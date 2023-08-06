@@ -14,7 +14,6 @@ const Login = () => {
   const { simpleUsers } = useSelector(state => state.simpleUsers)
   useEffect(() => {
     document.title = "CRM Task - Login"
-    localStorage.setItem("SIMPLE_PASSWORD", "password");
   }, []);
   const time = Date.now()
 
@@ -33,8 +32,6 @@ const Login = () => {
       navigate("/users");
       dispatch(updatePersonnel(data))
       localStorage.setItem("IS_SIMPLE", true)
-      localStorage.setItem("IS_ADMIN", false)
-      localStorage.setItem("IS_SUPER_ADMIN", false)
       setIsLoading(false)
       setIsError(false)
     } else {
