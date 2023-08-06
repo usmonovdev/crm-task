@@ -1,8 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { FiUsers } from "react-icons/fi";
-import { RiMoneyDollarCircleLine } from "react-icons/ri";
-import { GiSandsOfTime } from "react-icons/gi";
-import { BiErrorCircle } from "react-icons/bi";
+import { BsPersonLinesFill } from "react-icons/bs";
+import { BiSolidDollarCircle,BiSolidTimeFive } from "react-icons/bi";
+import { GoAlertFill } from "react-icons/go";
 import { IoMdClose } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSimpleNavbar } from "../store/theme";
@@ -12,32 +11,32 @@ const routes = [
     id: 1,
     name: "Personnel",
     link: "/admin-dashboard/personnels",
-    icon: FiUsers,
+    icon: BsPersonLinesFill,
   },
   {
     id: 2,
     name: "Sale",
     link: "/admin-dashboard/sale",
-    icon: RiMoneyDollarCircleLine,
+    icon: BiSolidDollarCircle,
   },
   {
     id: 3,
     name: "Rejected",
     link: "/admin-dashboard/rejected",
-    icon: BiErrorCircle,
+    icon: GoAlertFill,
   },
   {
     id: 4,
     name: "Deadline",
     link: "/admin-dashboard/deadline",
-    icon: GiSandsOfTime,
+    icon: BiSolidTimeFive,
   },
 ];
 
 const Navbar = () => {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
   const { simpleNavbar } = useSelector((state) => state.theme);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
     <>
@@ -49,7 +48,7 @@ const Navbar = () => {
               onClick={() => dispatch(toggleSimpleNavbar())}
             />
           </div>
-          <ul className="w-[150px] h-[100vh] bg-orange-600">
+          <ul className="w-[160px] h-[100vh] bg-orange-600">
             {routes.map((route) => {
               return (
                 <li

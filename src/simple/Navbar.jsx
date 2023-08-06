@@ -1,9 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { FiUsers } from "react-icons/fi";
-import { RiMoneyDollarCircleLine } from "react-icons/ri";
-import { LiaBusinessTimeSolid } from "react-icons/lia";
-import { MdCallMissed } from "react-icons/md";
-import { BiErrorCircle } from "react-icons/bi";
+import { GoAlertFill } from "react-icons/go";
+import { RiUserSmileFill } from "react-icons/ri";
+import { FaBusinessTime } from "react-icons/fa";
+import { BiSolidPhoneOff, BiSolidDollarCircle } from "react-icons/bi";
 import { IoMdClose } from "react-icons/io"
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSimpleNavbar } from "../store/theme";
@@ -13,31 +12,31 @@ const routes = [
     id: 1,
     name: "Users",
     link: "/users",
-    icon: FiUsers,
+    icon: RiUserSmileFill,
   },
   {
     id: 2,
     name: "Sale",
     link: "/sale",
-    icon: RiMoneyDollarCircleLine,
+    icon: BiSolidDollarCircle,
   },
   {
     id: 3,
     name: "Meeting",
     link: "/meeting",
-    icon: LiaBusinessTimeSolid,
+    icon: FaBusinessTime,
   },
   {
     id: 4,
     name: "Missed Calls",
     link: "/missed",
-    icon: MdCallMissed,
+    icon: BiSolidPhoneOff,
   },
   {
     id: 5,
     name: "Rejected",
     link: "/rejected",
-    icon: BiErrorCircle,
+    icon: GoAlertFill,
   },
 ];
 
@@ -53,7 +52,7 @@ const Navbar = () => {
           <div className="absolute right-0 w-[80px] h-[80px] text-neutral-100 center-mode">
             <IoMdClose className="text-neutral-100 text-3xl cursor-pointer" onClick={() => dispatch(toggleSimpleNavbar())} />
           </div>
-          <ul className="w-[150px] h-[100vh] bg-orange-600">
+          <ul className="w-[160px] h-[100vh] bg-orange-600">
             {routes.map((route) => {
               return (
                 <li

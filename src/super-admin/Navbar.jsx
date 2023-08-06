@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { FiUsers } from "react-icons/fi";
-import { RiAdminLine } from "react-icons/ri";
+import { BsPersonLinesFill } from "react-icons/bs";
+import { RiAdminFill } from "react-icons/ri";
 import { IoMdClose } from "react-icons/io"
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSimpleNavbar } from "../store/theme";
@@ -10,13 +10,13 @@ const routes = [
     id: 1,
     name: "Personnel",
     link: "/super-admin/personnels",
-    icon: FiUsers,
+    icon: BsPersonLinesFill,
   },
   {
     id: 2,
     name: "Admins",
     link: "/super-admin/admins",
-    icon: RiAdminLine,
+    icon: RiAdminFill,
   }
 ];
 
@@ -32,7 +32,7 @@ const Navbar = () => {
           <div className="absolute right-0 w-[80px] h-[80px] text-neutral-100 center-mode">
             <IoMdClose className="text-neutral-100 text-3xl cursor-pointer" onClick={() => dispatch(toggleSimpleNavbar())} />
           </div>
-          <ul className="w-[150px] h-[100vh] bg-orange-600">
+          <ul className="w-[160px] h-[100vh] bg-orange-600">
             {routes.map((route) => {
               return (
                 <li

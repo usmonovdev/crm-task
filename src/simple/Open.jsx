@@ -5,17 +5,11 @@ import { LiaBusinessTimeSolid } from "react-icons/lia";
 import { Listbox, Transition } from "@headlessui/react";
 import { MdCallMissed } from "react-icons/md";
 import { BiErrorCircle } from "react-icons/bi";
-import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { BsChevronExpand, BsCheck } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { upSimpleUsers } from "../store/simple-users";
 
 const actions = [
-  {
-    id: 1,
-    name: "Start",
-    icon: AiOutlineAppstoreAdd,
-  },
   {
     id: 2,
     name: "Sold",

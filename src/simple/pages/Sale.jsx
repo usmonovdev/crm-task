@@ -45,7 +45,7 @@ const Sale = () => {
               }`}
             />
           </div>
-          {!simpleUsers.length == 0 ? (
+          {!filtered.length == 0 ? (
             <div
               className="flex items-center gap-3 bg-neutral-800 border-neutral-700 border cursor-pointer w-fit p-2 rounded-lg"
               onClick={() => exportToExel("CRM Task - Sold", filtered)}
@@ -57,7 +57,7 @@ const Sale = () => {
             ""
           )}
         </div>
-        {simpleUsers.length ? (
+        {!filtered.length == 0 ? (
           <div className="overflow-x-auto pb-4">
             <table className="w-full min-w-[900px]">
               <thead className="h-[50px] w-full border border border-neutral-700 bg-neutral-800 rounded-lg">
