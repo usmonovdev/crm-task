@@ -20,7 +20,7 @@ const Users = () => {
   const { simpleNavbar } = useSelector((state) => state.theme);
   const { simpleUsers } = useSelector((state) => state.simpleUsers);
   const { personnels } = useSelector((state) => state.personnels);
-  console.log(personnels[0].deadline);
+  // console.log(personnels[0].deadline);
 
   useEffect(() => {
     document.title = "CRM Task - Users";
@@ -77,7 +77,7 @@ const Users = () => {
           <div
             className="flex items-center gap-3 bg-neutral-800 sm:w-fit w-full px-2 border-neutral-700 border cursor-pointer py-2 rounded-lg"
           >
-            <h1 className="uppercase">Deadline: {personnels[0].deadline}</h1>
+            <h1 className="uppercase">Deadline: {personnels.length > 0 ? personnels[0].deadline : "0"}</h1>
           </div>
         </div>
         {simpleUsers.length ? (

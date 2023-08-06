@@ -1,1 +1,0 @@
-export { default as SimpleUsers } from "./simple-users"
